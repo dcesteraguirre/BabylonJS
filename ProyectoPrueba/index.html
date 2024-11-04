@@ -100,6 +100,13 @@
     //     scene.meshes.forEach(mesh => {
     //         console.log(mesh.name);})
     // });
+
+    let button = document.getElementsByClassName("babylonVRicon vrdisplaypresenting");
+    if(button[0]){
+        button[0].addEventListener("click", function(){
+        console.log("El boton es este");
+        });
+    }
     scene.onBeforeRenderObservable.add(() => {
         if (mySphere && myBox) {  // Verifica que los objetos existen antes de animar
             if (mySphere.position.x <= -0.60) {
@@ -112,12 +119,17 @@
                 myBox.rotation.x += 0.0009 * scene.deltaTime * 3;
                 myBox.rotation.y += 0.0009 * scene.deltaTime * 3;
                 myBox.scaling.z += 0.0009 * scene.deltaTime;
+                if(myBox.position.x >= 5){
+                    // xr.baseExperience.exitXRAsync();
+                    return scene;
+                    // xr.baseExperience.exitXRAsync();
+                }
                 console.log("esfera está en posición x mayor a -0.6");
             }
         }
     });
 
-    BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/dcesteraguirre/BabylonJS/main/models/", "sofa_grey_fabric.glb", scene);
+    // BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/dcesteraguirre/BabylonJS/main/models/", "sofa_grey_fabric.glb", scene);
     
     return scene;
 };
